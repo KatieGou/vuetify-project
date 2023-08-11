@@ -1,9 +1,9 @@
 <template>
   <!-- <HelloWorld /> -->
-  <UserRegister />
+  <UserHandle />
 </template>
 
 <script setup>
   import HelloWorld from '@/components/HelloWorld.vue'
-  import UserRegister from '@/components/UserRegister.vue'
+  import UserHandle from '@/components/UserHandle.vue'
 </script>

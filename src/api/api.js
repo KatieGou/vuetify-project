@@ -10,10 +10,21 @@ export async function postRegister(data) {
         const response = await api.post("/register", data);
         alert(response.data.message);
         // console.log(response);
-        console.log('user to be registered: ', data);
+        // console.log('user to be registered: ', data);
     } catch (error) {
         alert(error.response.data);
-        console.log('error registering user: ', error);
+        // console.log('error registering user: ', error);
     }   
 }
 
+export async function postLogin(data) {
+    try {
+        const response = await api.post("/login", data);
+        alert(response.data.message);
+        // console.log(response);
+        // console.log('user to be logged in: ', data);
+    } catch (error) {
+        alert(error.response.data);
+        // console.log('error logging in user: ', error);
+    } 
+}
