@@ -20,11 +20,13 @@ export async function postRegister(data) {
 export async function postLogin(data) {
     try {
         const response = await api.post("/login", data);
-        alert(response.data.message);
-        // console.log(response);
+        // alert(response.data.message);
+        console.log('response: ', response.data.message);
         // console.log('user to be logged in: ', data);
+        return response;
     } catch (error) {
-        alert(error.response.data);
+        // alert(error.response.data);
         // console.log('error logging in user: ', error);
+        return error.response.data;
     } 
 }
