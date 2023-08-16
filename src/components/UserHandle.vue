@@ -79,7 +79,7 @@ export default {
         username: '',
         password: '',
       };
-      console.log('loginStatus: ', this.loginStatus);
+      // console.log('loginStatus: ', this.loginStatus);
       if (this.loginStatus === 'Wrong password') {
         this.wrongPassword = true;
         this.nonExistingUser = false;
@@ -87,7 +87,8 @@ export default {
         this.nonExistingUser = true;
         this.wrongPassword = false;
       } else {
-        this.$router.push('/dashboard');
+        this.$router.push(`/users/${this.loginStatus.data[0].user_id}`);
+        // console.log('loginStatus: ', this.loginStatus.data[0].user_id);
         this.loginClicked = false;
         this.wrongPassword = false;
         this.nonExistingUser = false;
@@ -95,5 +96,4 @@ export default {
     }
   },
 };
-// TODO: dashboard after login
 </script>

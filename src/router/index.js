@@ -15,8 +15,8 @@ const routes = [
         component: () => import(/* webpackChunkName: "home" */ '@/views/Home.vue'),
       },
       {
-        path: '/dashboard',
-        name: 'Dashboard',
+        path: '/users/:userid',
+        name: 'FavoriteItems',
         component: () => import('@/views/ItemView.vue'),
       },
     ],
