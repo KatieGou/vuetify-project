@@ -38,7 +38,7 @@ export async function getFavorites(userid) {
     try {
         const response = await api.get(`/users/${userid}`);
         // alert(response.data.message);
-        console.log('response: ', response);
+        // console.log('response: ', response);
         // console.log('user to be logged in: ', data);
         return response;
     } catch (error) {
@@ -46,4 +46,14 @@ export async function getFavorites(userid) {
         console.log('error fetching favorites: ', error);
         return error.response.data;
     } 
+}
+
+export async function postFavorite(userid, data) {
+    try {
+        const response = await api.post(`/users/${userid}`, data);
+        return response;
+    } catch (error) {
+        console.log('error saving favorite: ', error);
+        return error.response.data;
+    }
 }
