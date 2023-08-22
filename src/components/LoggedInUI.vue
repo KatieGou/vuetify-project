@@ -1,6 +1,9 @@
 <template>
   <div>
-    <h1>User data</h1>
+    <h1>Welcome {{ username }}!</h1>
+    <br/>
+    <h2>Here are your favorite items.</h2>
+    <br/>
     <v-table>
       <thead>
         <tr>
@@ -22,7 +25,7 @@
     </v-table>
 
     <div>
-      <v-btn @click="editFavorites" color="primary">edit</v-btn>
+      <v-btn @click="editFavorites" color="green">edit</v-btn>
       <v-dialog v-model="editDialog">
         <v-card>
           <v-card-title>
@@ -54,6 +57,13 @@
         </v-card>
       </v-dialog>
     </div>
+
+    <div>
+      <br />
+      <v-btn @click="logout" color="red">
+        <v-icon>mdi-logout</v-icon>
+      </v-btn>
+    </div>
   </div>
 </template>
 
@@ -66,7 +76,7 @@ export default {
   data() {
     return {
       userID: null,
-      username: null,
+      // username: null,
       favorites: [
         {
           favorite_computer: "",
@@ -79,12 +89,18 @@ export default {
       editDialog: false,
     };
   },
+  computed: {
+    username() {
+      return sessionStorage.getItem('username') || 'Guest';
+    },
+  },
   mounted() {
     this.fetchFavorites();
   },
   methods: {
     async fetchFavorites() {
       this.userID = this.$route.params.userid;
+      // this.username = this.$route.params.username;
       // console.log('userid:', this.$route.params.userid);
       const raw_favorites = await getFavorites(this.userID);
       this.favorites = raw_favorites.data;
@@ -103,6 +119,11 @@ export default {
       this.favorites = this.editingFavorites;
       await postFavorite(this.userID, this.favorites[0]);
       this.editDialog = false;
+    },
+    logout() {
+      sessionStorage.removeItem('username');
+      sessionStorage.removeItem('userid');
+      this.$router.push({ name: 'Home' });
     },
   }
 }
