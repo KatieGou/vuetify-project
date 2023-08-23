@@ -60,15 +60,38 @@
 
     <div>
       <br />
-      <v-btn @click="logout" color="red">
+      <v-btn @click="logout" color="blue">
         <v-icon>mdi-logout</v-icon>
       </v-btn>
+    </div>
+
+    <div>
+      <br />
+      <br />
+      <p class="small-grey">Don't want to be with us anymore?</p>
+      <v-btn @click="askDeleteUser" color="red">Delete Account</v-btn>
+      <v-dialog v-model="deleteUserDialog">
+        <v-card>
+          <v-card-title>
+            <span class="center">Delete Account</span>
+          </v-card-title>
+          <v-card-text>
+            <p>Are you sure you want to delete your account?</p>
+            <!-- password verification? -->
+          </v-card-text>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn color="red" text @click="deleteUser">Yes</v-btn>
+            <v-btn color="blue darken-1" text @click="closeDeleteUser">No</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
     </div>
   </div>
 </template>
 
 <script>
-import { getFavorites, postFavorite } from '@/api/api';
+import { getFavorites, postFavorite, deleteAUser } from '@/api/api';
 import { deepCopy } from '@/utils/utils';
 
 export default {
@@ -87,6 +110,7 @@ export default {
       ],
       editingFavorites: [],
       editDialog: false,
+      deleteUserDialog: false,
     };
   },
   computed: {
@@ -123,6 +147,17 @@ export default {
     logout() {
       sessionStorage.removeItem('username');
       sessionStorage.removeItem('userid');
+      this.$router.push({ name: 'Home' });
+    },
+    askDeleteUser() {
+      this.deleteUserDialog = true;
+    },
+    closeDeleteUser() {
+      this.deleteUserDialog = false;
+    },
+    async deleteUser() {
+      this.deleteUserDialog = false;
+      await deleteAUser(this.userID);
       this.$router.push({ name: 'Home' });
     },
   }

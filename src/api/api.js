@@ -57,3 +57,13 @@ export async function postFavorite(userid, data) {
         return error.response.data;
     }
 }
+
+export async function deleteAUser(userid) {
+    try {
+        const response = await api.delete(`users/deleteUser?userid=${userid}`);
+        return response;
+    } catch (error) {
+        console.log('error deleting user: ', error);
+        return error.response.data;
+    }
+}
