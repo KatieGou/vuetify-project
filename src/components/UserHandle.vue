@@ -95,10 +95,6 @@ export default {
         this.nonExistingUser = true;
         this.wrongPassword = false;
       } else {
-        // this.$store.commit('setUser', {
-        //   user_id: this.loginStatus.data[0].user_id,
-        //   username: this.loginStatus.data[0].username 
-        // });
         sessionStorage.setItem('userid', this.loginStatus.data[0].user_id);
         sessionStorage.setItem('username', this.loginStatus.data[0].username);
         this.$router.push(`/users/${this.loginStatus.data[0].user_id}`);

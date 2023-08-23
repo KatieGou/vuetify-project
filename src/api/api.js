@@ -7,7 +7,7 @@ const api = axios.create({
 // api functions
 export async function postRegister(data) {
     try {
-        const response = await api.post("/register", data);
+        const response = await api.post("users/register", data);
         alert(response.data.message);
         // console.log(response);
         // console.log('user to be registered: ', data);
@@ -19,7 +19,7 @@ export async function postRegister(data) {
 
 export async function postLogin(data) {
     try {
-        const response = await api.post("/login", data);
+        const response = await api.post("users/login", data);
         // alert(response.data.message);
         // console.log('response: ', response.data.message);
         // console.log('user to be logged in: ', data);
@@ -36,7 +36,7 @@ export async function postLogin(data) {
 export async function getFavorites(userid) {
     // console.log('userid: ', userid);
     try {
-        const response = await api.get(`/users/${userid}`);
+        const response = await api.get(`items/users/${userid}`);
         // alert(response.data.message);
         // console.log('response: ', response);
         // console.log('user to be logged in: ', data);
@@ -50,7 +50,7 @@ export async function getFavorites(userid) {
 
 export async function postFavorite(userid, data) {
     try {
-        const response = await api.post(`/users/${userid}`, data);
+        const response = await api.post(`items/users/${userid}`, data);
         return response;
     } catch (error) {
         console.log('error saving favorite: ', error);
